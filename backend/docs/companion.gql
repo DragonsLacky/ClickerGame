@@ -1,0 +1,44 @@
+mutation COMPANION_LEVEL_UP($id:ID!){
+  level_up_companion(id:$id){
+    companion{
+      id
+      name
+      dps
+      image
+      cost
+    }
+    level
+  }
+}
+
+query GET_HERO_COMPANIONS{
+  getHeroCompanions{
+    companion{
+      id
+      name
+      dps
+      image
+      cost
+    }
+    level
+  }
+}
+mutation CREATE_COMPANION($id:ID!){
+  createCompanion(id:$id){
+    id
+    name
+    dps
+    image
+    cost
+  }
+}
+
+query GET_COMPANIONS {
+  getCompanions{
+    id
+    name
+    image
+    cost
+    dps
+  }
+}

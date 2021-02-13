@@ -1,0 +1,48 @@
+mutation CREATE_GEAR {
+  createGear{
+    id
+    name
+    image
+    type
+    rarity
+    multilpier
+    equipped
+  }
+}
+
+query GET_GEAR {
+  getAllGear{
+    id
+    name
+    image
+    type
+    rarity
+    multilpier
+    equipped
+  }
+}
+
+
+mutation GEAR_EQUIP($id:ID!){
+  equipGear(id:$id){
+    id
+    name
+    image
+    type
+    rarity
+    multilpier
+    equipped
+  }
+}
+
+mutation GEAR_UNEQUIP($id:ID!){
+  unEquipGear(id:$id){
+    id
+    name
+    image
+    type
+    rarity
+    multilpier
+    equipped
+  }
+}

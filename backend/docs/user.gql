@@ -1,0 +1,32 @@
+query LOGIN($username:String!, $password:String!){
+  userAuthenticate(username:$username,password:$password){
+    user{
+      username
+      email
+    }
+    token
+  }
+}
+
+mutation REGISTER_USER($newUser:UserInput!) {
+  userRegister(newUser:$newUser){
+    token
+    user{
+      id
+      username
+      email
+      firstName
+      lastName
+      
+    }
+  }
+} 
+
+query SHOW_PROFILE{
+	showUserProfile{
+    username
+    email
+    firstName
+    lastName
+  }
+}

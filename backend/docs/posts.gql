@@ -1,0 +1,98 @@
+query LIST_POSTS{
+  getAllPosts{
+    title
+    content
+    featuredImage
+    createdAt
+  }
+}
+
+query GET_POST($id:ID!){
+  getPostId(id:$id){
+    id
+    title
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+mutation CREATE_NEW_POST($title:String!, $content:String!, $featuredImage:String){
+  createNewPost(
+    newPost:{
+    	title:$title,
+      content:$content,
+      featuredImage:$featuredImage
+  	}
+  ){
+    title
+    content
+    featuredImage
+  }
+}
+
+
+mutation EDIT_POST($id: ID!, $Post: PostInput!) {
+  editPost(updatedPost: $Post, id: $id) {
+    id
+    title
+    content
+    featuredImage
+    createdAt
+    updatedAt
+  }
+}
+
+mutation DELETE_POST($id: ID!) {
+  deletePost(id: $id) {
+    id
+    message
+    success
+  }
+}
+
+query LIST_POST_PAGINATED($page:Int, $limit:Int) {
+  getAllPostsPaginated(page: $page, limit:$limit){
+    items{
+      title
+      content
+      author{
+        username
+      }
+    }
+    paginator{
+      itemCount
+      perPage
+      pageCount
+      currentPage
+      slNo
+      hasPrevPage
+      hasNextPage
+      prev
+      next
+    }
+  }
+}
+
+query LIST_LOGGED_IN_USER_POSTS($page:Int, $limit:Int) {
+  getLoggedInUsersPosts(page: $page, limit: $limit) {
+    items{
+      title
+      content
+      author{
+        username
+      }
+    }
+    paginator{
+      itemCount
+      perPage
+      pageCount
+      currentPage
+      slNo
+      hasPrevPage
+      hasNextPage
+      prev
+      next
+    }
+  }
+}

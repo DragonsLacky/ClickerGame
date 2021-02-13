@@ -1,0 +1,19 @@
+query GET_MONSTER {
+  getMonster{
+    health
+    type
+    gold
+    image
+    drop_chance
+  }
+}
+
+mutation CREATE_AND_REPLACE {
+  createAndReplace{
+    health
+    type
+    gold
+    image
+    drop_chance
+  }
+}

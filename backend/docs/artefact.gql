@@ -1,0 +1,47 @@
+mutation ARTEFACT_LEVEL_UP($id:ID){
+  level_up_artefact(id:$id){
+    id
+    name
+    image
+    multilpier
+    stat
+    rarity
+    cost
+  }
+}
+
+query GET_ARTEFACTS {
+  getArtefacts{
+    id
+    name
+    image
+    multilpier
+    stat
+  }
+}
+
+mutation CREATE_ARTEFACT{
+  createArtefact {
+      id
+      name
+      image
+      multilpier
+      stat
+      rarity
+      cost
+  }
+}
+
+
+
+query GET_HERO_ARTEFACTS{
+  getHeroArtefacts{
+    artefact{
+      id
+      name
+      image
+      multilpier
+    }
+    level
+  }
+}

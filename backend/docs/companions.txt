@@ -1,0 +1,57 @@
+let arr = [
+    {
+        name: 'Cosette, Jewel of House Sabre',
+        image: 'http://localhost:8080/companion/Cosette_C_Jewel_of_House_Sabre_0.png',
+        cost: 100,
+        dps: 1
+    },
+    {
+        name: 'Maya Muerta the Watcher',
+        image: 'http://localhost:8080/companion/Maya_Muerta_the_Watcher_0.png',
+        cost: 500,
+        dps: 3
+    },
+    {
+        name: 'Jayce the Ruthless Cutter',
+        image: 'http://localhost:8080/companion/Jayce_the_Ruthless_Cutter_0.png',
+        cost: 500,
+        dps: 40
+    },
+    {
+        name: 'Lil\' Ursa ',
+        image: 'http://localhost:8080/companion/Lil__Ursa_0.png',
+        cost: 1000,
+        dps: 100
+    },
+    {
+        name: 'Pingo of the Tori',
+        image: 'http://localhost:8080/companion/Pingo_of_the_Tori_0.png',
+        cost: 8000,
+        dps: 600
+    },
+    {
+        name: 'Lady Lucy the Night Caster',
+        image: 'http://localhost:8080/companion/Lady_Lucy_the_Night_Caster_0.png',
+        cost: 20000,
+        dps: 1900
+        
+    },
+    {
+        name: 'Zato the Blind Staff Master',
+        image: 'http://localhost:8080/companion/Zato_the_Blind_Staff_Master_0.png',
+        cost: 59600,
+        dps: 5900,
+    },
+    {
+        name:'Yzafa the Fearsome Bandit',
+        image: 'http://localhost:8080/companion/Yzafa_the_Fearsome_Bandit_0.png',
+        cost: 100000,
+        dps: 20000
+    },
+    {
+        name:'Damon of the Darkness',
+        image: 'http://localhost:8080/companion/Damon_of_the_Darkness_0.png',
+        cost: 200000,
+        dps: 50000
+    }
+]
