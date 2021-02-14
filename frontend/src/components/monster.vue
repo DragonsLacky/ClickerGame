@@ -3,7 +3,7 @@
         <div class="w-full flex flex-row justify-center text-lg font-bold">
             <div class="w-64 p-1 m-4 text-center bg-gray-400 rounded-full relative"><div class="bg-red-400 rounded-full h-7" :style="{width:healthPercentage}"><div class="absolute w-full">{{ monster.health }}</div></div></div>
         </div>
-        <img :src="monster.image" @click="damageMonster" class="h-86 md:h-1/2 absolute right-1/6  md:right-1/3 lg:w-1/2 lg:h-auto lg:bottom-28 xl:bottom-12 bottom-64" alt="">
+        <img :src="monster.image" @click="damageMonster" class="select-none h-86 md:h-1/2 absolute right-1/6  md:right-1/3 lg:w-1/2 lg:h-auto lg:bottom-28 xl:bottom-12 bottom-64" alt="">
     </div>
 </template>
 

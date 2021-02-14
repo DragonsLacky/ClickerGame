@@ -58,8 +58,6 @@ export default {
                 throw new ApolloError('Gear does not exist')
             }
 
-            
-
             const stat =  {
                 Helmet : 'boss_gold',
                 Chestplate: 'companion_damage',
@@ -85,7 +83,6 @@ export default {
                 await equipedGear.save();
             }
             
-
             gearPiece.equipped=true;
 
             hero[stat[gearPiece.type]] += Rarity[gearPiece.rarity] * gearPiece.multilpier;

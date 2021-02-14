@@ -121,6 +121,7 @@ export default {
                 await this.$apollo.mutate({
                     mutation: CREATE_HERO
                 });
+                this.router.push('/');
             } catch(err){
                 console.log(err);
             }

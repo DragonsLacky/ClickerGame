@@ -35,3 +35,6 @@ const HeroSchema = new Schema({
 const Hero = model('heroes', HeroSchema);
 
 export default Hero;
+
+
+

@@ -13,7 +13,7 @@ export default {
             await hero.populate('artefacts.artefact').execPopulate()
             await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
-            await hero.zone.populate('owner').execPopulate()
+            await hero.populate('zone.owner').execPopulate()
             return hero;
         }
     },
@@ -37,14 +37,13 @@ export default {
             hero = await Hero.create({owner: user.id, zone: zone.id})
             zone.owner = hero.id;
             await zone.save();
-            await Zone.findOneAndUpdate(zone);
             await hero.populate('owner').execPopulate();
             await hero.populate('gearpieces').execPopulate()
             await hero.populate('companions.companion').execPopulate()
             await hero.populate('artefacts.artefact').execPopulate()
             await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
-            await hero.zone.populate('owner').execPopulate()
+            await hero.populate('zone.owner').execPopulate()
             return hero;
         },
 
@@ -74,7 +73,7 @@ export default {
             await hero.populate('artefacts.artefact').execPopulate()
             await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
-            await hero.zone.populate('owner').execPopulate()
+            await hero.populate('zone.owner').execPopulate()
 
             return hero;
         },
@@ -113,10 +112,10 @@ export default {
             await hero.populate('artefacts.artefact').execPopulate()
             await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
-            await hero.zone.populate('owner').execPopulate()
+            await hero.populate('zone.owner').execPopulate()
 
             return hero;
-        }
+        }   
     }
 }
 

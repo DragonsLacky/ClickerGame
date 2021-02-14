@@ -49,6 +49,7 @@ export default {
         async login() {
             try{
                 await this.loginUser(this.user);
+                this.router.push('/');
             } catch(err) {
                 this.error = err.message.split(': ')[1];
             }
