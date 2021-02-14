@@ -7,7 +7,7 @@ export default gql`
     }
     extend type Mutation {
         createArtefact: Artefact!
-        level_up_artefact(id:ID): Artefact!
+        level_up_artefact(id:ID): HeroArtefactResPoints!
     }
     type Artefact {
         id:ID!
@@ -17,5 +17,12 @@ export default gql`
         stat: String!
         rarity: String!
         cost: Float!
+    }
+
+    type HeroArtefactResPoints {
+        HeroArtefact: HeroArtefact!
+        resurection_points: Int!
+        playerstat: String!
+        multilpier: Float!
     }
 `;

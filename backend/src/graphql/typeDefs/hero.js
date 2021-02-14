@@ -7,7 +7,7 @@ export default gql`
     
     extend type Mutation {
         createHero: Hero!
-        level_up: Hero!
+        level_up(levels:Int!): Hero!
         resetHero: Hero!
     }
 
@@ -30,7 +30,6 @@ export default gql`
         boss_gold:Float!
         upgrade_cost:Float!
         luck: Float!
-        companion: Float!
         level_up: Float!
         owner : User!
         companions: [HeroCompanion]

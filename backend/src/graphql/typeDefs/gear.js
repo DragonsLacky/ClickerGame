@@ -8,8 +8,8 @@ export default gql`
     
     extend type Mutation {
         createGear: Gear!
-        equipGear(id:ID!): Gear!
-        unEquipGear(id:ID!): Gear!
+        equipGear(id:ID!): [Gear]!
+        unEquipGear(id:ID!): [Gear]!
     }
 
     type Gear {
@@ -20,5 +20,6 @@ export default gql`
         rarity: String!
         name: String!
         equipped: Boolean!
+        owner: Hero!
     }
 `;

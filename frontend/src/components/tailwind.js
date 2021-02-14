@@ -78,7 +78,8 @@ export default {
                 error: 'text-white bg-red-500 border border-transparent rounded shadow-sm hover:bg-red-600 focus:ring-opacity-50',
                 success: 'text-white bg-green-500 border border-transparent rounded shadow-sm focus:ring-opacity-50 hover:bg-green-600',
                 link: 'text-blue-500 underline hover:text-blue-600 focus:ring-opacity-50',
-                tabmenu: 'text-white bg-indigo-400 border border-transparent focus:border-none focus:ring-none shadow-sm rounded-md focus:ring-opacity-0 hover:bg-indigo-500'
+                tabmenu: 'text-white bg-indigo-400 border border-transparent focus:border-none focus:ring-none shadow-sm rounded-md focus:ring-opacity-0 hover:bg-indigo-500',
+                dissabled: 'text-white bg-gray-500 border border-transparent focus:border-none focus:ring-none shadow-sm rounded-md focus:ring-opacity-0 hover:bg-gray-500'
             }
         }
     },

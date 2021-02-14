@@ -29,6 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { CREATE_HERO } from '@/gql'
 
 export default {
     data : () => {
@@ -117,9 +118,11 @@ export default {
         async register(){
             try{
                 await this.registerUser(this.user);
+                await this.$apollo.mutate({
+                    mutation: CREATE_HERO
+                });
             } catch(err){
-                //this.serverError = ;
-                console.log();
+                console.log(err);
             }
         },
         updateValue(event) {

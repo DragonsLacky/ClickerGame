@@ -7,8 +7,8 @@ export default gql`
     }
 
     extend type Mutation {
-        createCompanion(id:ID!): Companion!
-        level_up_companion(id:ID!): HeroCompanion!
+        createCompanion(id:ID!): HeroCompanionProps!
+        level_up_companion(id:ID!,levels:Int!): HeroCompanionProps!
     }
     
     type Companion {
@@ -17,5 +17,10 @@ export default gql`
         dps: Float!
         image: String!
         cost: Float!
+    }
+
+    type HeroCompanionProps {
+        HeroCompanion: HeroCompanion!
+        balance: Int!
     }
 `;

@@ -7,7 +7,7 @@ export default gql`
     
     extend type Mutation {
         createMonster: Monster!
-        createAndReplace: Monster!
+        createAndReplace: Zone!
     }
 
     type Monster {

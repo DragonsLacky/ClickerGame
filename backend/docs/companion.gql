@@ -1,5 +1,6 @@
-mutation COMPANION_LEVEL_UP($id:ID!){
-  level_up_companion(id:$id){
+mutation COMPANION_LEVEL_UP($id:ID!,$levels:Int!){
+  level_up_companion(id:$id,levels:$levels){
+    id
     companion{
       id
       name
@@ -26,10 +27,14 @@ query GET_HERO_COMPANIONS{
 mutation CREATE_COMPANION($id:ID!){
   createCompanion(id:$id){
     id
-    name
-    dps
-    image
-    cost
+    companion{
+      id
+      name
+      dps
+      image
+      cost
+    }
+    level
   }
 }
 

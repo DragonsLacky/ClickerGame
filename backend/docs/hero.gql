@@ -5,17 +5,71 @@ mutation RESURECT_HERO {
     balance
     damage
     level_up
+    resurection_points
+    resurection_bonus
+    critical_chance
+    critical_damage
+    all_damage
+    companion_damage
+    hero_damage
+    boss_gold
+    upgrade_cost
+    luck
     companions{
+      id
       companion{
+        id
         name
+        dps
+        image
+        cost
       }
       level
+    }
+    artefacts{
+      id
+      artefact{
+        id
+        name
+        image
+        multilpier
+        stat
+        rarity
+        cost
+      }
+      level
+    }
+    gearpieces{
+      id
+      image
+      multilpier
+      type
+      rarity
+      name
+      equipped
+    }
+    zone{
+      monster{
+        health
+        image
+        type
+        drop_chance
+        gold
+      }
+      award
+      drop_chance
+      level
+    }
+    owner{
+      id
+      username
+      email
     }
   }
 }
 
-mutation HERO_LEVEL_UP {
-  level_up{
+mutation HERO_LEVEL_UP($levels:Int!) {
+  level_up(levels:$levels){
     id
     level
     balance
@@ -32,6 +86,7 @@ mutation HERO_LEVEL_UP {
     upgrade_cost
     luck
     companions{
+      id
       companion{
         id
         name
@@ -42,6 +97,7 @@ mutation HERO_LEVEL_UP {
       level
     }
     artefacts{
+      id
       artefact{
         id
         name

@@ -1,5 +1,5 @@
 import { ApolloError } from "apollo-server-express";
-import { GenerateRandomRarity, GenerateRandomArmorPiece } from '../../functions'
+import { GenerateRandomRarity, GenerateRandomArmorPiece, GenerateRandomItem } from '../../functions'
 
 
 
@@ -17,9 +17,24 @@ export default {
         }
     },
     Mutation: {
-
         createGear: async (_, {}, { Hero, Gear, user }) => {
             let hero = await Hero.findOne({owner: user._id});
+            await hero.populate('zone').execPopulate();
+            await hero.populate('zone.monster').execPopulate();
+            let items = {
+                drop: {
+                    probability: hero.zone.monster.drop_chance/100,
+                    value:true
+                },
+                not_drop: {
+                    probability: hero.zone.monster.drop_chance/100,
+                    value: true
+                }
+            };
+            let drop = GenerateRandomItem(items);
+            if(!drop.value.value){
+                throw new ApolloError('No item');
+            }
             let rarity = GenerateRandomRarity();
             let gearType = GenerateRandomArmorPiece();
             let gear = await Gear.create({
@@ -42,7 +57,8 @@ export default {
             if(!gearPiece){
                 throw new ApolloError('Gear does not exist')
             }
-            gearPiece.equipped=true;
+
+            
 
             const stat =  {
                 Helmet : 'boss_gold',
@@ -61,17 +77,32 @@ export default {
                 'Common' : 1
             }
 
+            let equipedGear = hero.gearpieces.filter(doc => doc.type === gearPiece.type && doc.equipped)[0];
+            
+            if(equipedGear){
+                equipedGear.equipped = false;
+                hero[stat[equipedGear.type]] -= Rarity[equipedGear.rarity] * equipedGear.multilpier;
+                await equipedGear.save();
+            }
+            
+
+            gearPiece.equipped=true;
+
             hero[stat[gearPiece.type]] += Rarity[gearPiece.rarity] * gearPiece.multilpier;
 
-            hero.save();
+            await gearPiece.save();
+            await hero.save();
 
-            return gearPiece;
+            await hero.populate('gearpieces').execPopulate();
+            await hero.populate('gearpieces.owner').execPopulate()
+
+            return hero.gearpieces;
         },
 
         unEquipGear: async (_, {id}, {Hero, Gear, user}) => {
             let hero = await Hero.findOne({owner: user._id});
             await hero.populate('gearpieces').execPopulate();
-            let gearPiece = hero.gearpieces.filter(doc => doc._id.toString() === id.toString() && !doc.equipped)[0];
+            let gearPiece = hero.gearpieces.filter(doc => doc._id.toString() === id.toString() && doc.equipped)[0];
             if(!gearPiece){
                 throw new ApolloError('Gear does not exist or is not equiped')
             }
@@ -96,9 +127,11 @@ export default {
 
             hero[stat[gearPiece.type]] -= Rarity[gearPiece.rarity] * gearPiece.multilpier;
 
-            hero.save();
-
-            return gearPiece;
+            await gearPiece.save();
+            await hero.save();
+            await hero.populate('gearpieces').execPopulate();
+            await hero.populate('gearpieces.owner').execPopulate()
+            return hero.gearpieces;
         }
     }
 }

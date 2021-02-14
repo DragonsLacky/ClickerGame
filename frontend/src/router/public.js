@@ -3,6 +3,9 @@ export default [
     {
         path: '/',
         name: 'Home',
+        meta:{
+          requiresAuthentication: true
+        },
         component: () => import('../views/game/main.vue')
       },
       {

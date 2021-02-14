@@ -7,7 +7,6 @@ export default {
     Query: {
         getHero: async (_,{} , { Hero, user }) => {
             let hero = await Hero.findOne({owner: user.id});
-            hero.resurection_points=28489;
             await hero.populate('owner').execPopulate();
             await hero.populate('gearpieces').execPopulate()
             await hero.populate('companions.companion').execPopulate()
@@ -15,7 +14,6 @@ export default {
             await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
             await hero.zone.populate('owner').execPopulate()
-            await hero.save();
             return hero;
         }
     },
@@ -38,29 +36,51 @@ export default {
             
             hero = await Hero.create({owner: user.id, zone: zone.id})
             zone.owner = hero.id;
+            await zone.save();
             await Zone.findOneAndUpdate(zone);
             await hero.populate('owner').execPopulate();
-            await hero.populate('zone').execPopulate();
+            await hero.populate('gearpieces').execPopulate()
+            await hero.populate('companions.companion').execPopulate()
+            await hero.populate('artefacts.artefact').execPopulate()
+            await hero.populate('zone').execPopulate()
             await hero.populate('zone.monster').execPopulate()
             await hero.zone.populate('owner').execPopulate()
             return hero;
         },
 
-        level_up: async (_, {}, {Hero, user}) => {
+        level_up: async (_, {levels}, {Hero, user}) => {
             let hero = await Hero.findOne({owner: user.id});
-            if(hero.balance < hero.level_up){
+
+            let total_cost = hero.level_up;
+
+            for(let i = hero.level + 1; i < hero.level + levels; ++i){
+                total_cost += Math.floor((Math.pow((i*1.5),2.16)/21.7009)*0.3+1)
+            }
+
+            if(hero.balance < total_cost){
                 throw new ApolloError('Not enoguh gold');
             }
-            hero.balance -= hero.level_up;
-            hero.level += 1;
-            hero.damage = Math.ceil((0.15 * Math.pow((hero.level+4),2.18) - 5.3)/(Math.sqrt(2*hero.level+8)-2)-hero.level+2.22);
+            hero.balance -= total_cost;            
+            
+            hero.level += levels;
+            hero.damage += Math.ceil((0.15 * Math.pow((hero.level+4),2.18) - 5.3)/(Math.sqrt(2*hero.level+8)-2)-hero.level+2.22) * 3;
             hero.level_up = Math.floor((Math.pow((hero.level*1.5),2.16)/21.7009)*0.3+1);
+            
             await hero.save()
+
+            await hero.populate('owner').execPopulate();
+            await hero.populate('gearpieces').execPopulate()
+            await hero.populate('companions.companion').execPopulate()
+            await hero.populate('artefacts.artefact').execPopulate()
+            await hero.populate('zone').execPopulate()
+            await hero.populate('zone.monster').execPopulate()
+            await hero.zone.populate('owner').execPopulate()
+
             return hero;
         },
 
         resetHero: async (_, {}, {Monster, Zone, Hero, user}) => {
-            let hero = await Hero.findOne({owner: user.id});
+            let hero = await Hero.findOne({owner: user._id});
             hero.populate('companions.companion').execPopulate();
             hero.populate('zone').execPopulate();
             hero.populate('zone.monster').execPopulate();
@@ -86,6 +106,14 @@ export default {
 
             await hero.zone.save()
             await hero.save()
+
+            await hero.populate('owner').execPopulate();
+            await hero.populate('gearpieces').execPopulate()
+            await hero.populate('companions.companion').execPopulate()
+            await hero.populate('artefacts.artefact').execPopulate()
+            await hero.populate('zone').execPopulate()
+            await hero.populate('zone.monster').execPopulate()
+            await hero.zone.populate('owner').execPopulate()
 
             return hero;
         }
